@@ -26,11 +26,18 @@ async function run() {
 
 
   try {
-    let tags = await octokit.repos.listTags({
+    let listTags = await octokit.repos.listTags({
       owner: owner, 
       repo: context.repo.repo
     });
-    console.log('tags: ', tags);
+
+    let listReleases = await octokit.repos.listReleases({
+      owner: owner,
+      repo: context.repo.repo,
+    });
+    
+    console.log('listTags: ', listTags);
+    console.log('listReleases: ', listReleases);
   } catch(error) {
     console.log('tags error: ', error);
   }
