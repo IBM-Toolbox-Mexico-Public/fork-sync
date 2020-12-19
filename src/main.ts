@@ -63,7 +63,7 @@ async function run() {
           repo: context.repo.repo,
           tag: tag.name,
           message: '',
-          object: tag.commit,
+          object: tag.commit.sha,
           type: 'commit'
         });
         } catch(error) {
