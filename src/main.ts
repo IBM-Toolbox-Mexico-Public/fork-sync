@@ -39,9 +39,9 @@ async function run() {
     // console.log('listTags: ', listTags);
     // console.log('listReleases: ', listReleases);
 
-    listTags.data.forEach(tag => {
+    listTags.data.forEach( async (tag) => {
       console.log(tag.name + ' sha1: ', tag.commit.sha);
-      const getTag = octokit.git.getTag({
+      let getTag = await octokit.git.getTag({
         owner: context.repo.owner,
         repo: context.repo.repo,
         tag_sha: tag.commit.sha,
