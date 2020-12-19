@@ -41,16 +41,22 @@ async function run() {
 
     listTags.data.forEach( async (tag) => {
       console.log(tag.name + ' sha1: ', tag.commit.sha);
-      let getTag = await octokit.git.getTag({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        tag_sha: tag.commit.sha,
-      });
+      let getTag;
+      try {
+        getTag = await octokit.git.getTag({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          tag_sha: tag.commit.sha,
+        });
+      } catch(error) {
+        console.log('getTag error', error);
+        getTag = false;
+      }
 
       console.log('getTag', getTag);
 
-      if ( !getTag ) {
-        octokit.git.createTag({
+      if ( getTag === false ) {
+        await octokit.git.createTag({
           owner: context.repo.owner,
           repo: context.repo.repo,
           tag: tag.name,
