@@ -107,7 +107,7 @@ async function run() {
 
         let createRelease;
         try {
-          createRelease = await octokit.git.createRelease({
+          createRelease = await octokit.repos.createRelease({
             owner: context.repo.owner,
             repo: context.repo.repo,
             tag_name: tag.name,
