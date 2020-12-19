@@ -49,14 +49,16 @@ async function run() {
           tag_sha: tag.commit.sha,
         });
       } catch(error) {
-        console.log('getTag error', error);
+        console.log('getTag error: ', error);
         getTag = false;
       }
 
-      console.log('getTag', getTag);
+      console.log('getTag: ', getTag);
 
       if ( getTag === false ) {
-        await octokit.git.createTag({
+        let createTag;
+        try {
+        createTag = await octokit.git.createTag({
           owner: context.repo.owner,
           repo: context.repo.repo,
           tag: tag.name,
@@ -64,6 +66,11 @@ async function run() {
           object: tag.commit,
           type: 'commit'
         });
+        } catch(error) {
+          console.log('createTag error: ', error);
+        }
+
+        console.log('createTag: ', createTag)
       }
     });
     
