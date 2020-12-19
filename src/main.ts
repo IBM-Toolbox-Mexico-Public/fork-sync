@@ -72,6 +72,52 @@ async function run() {
 
         console.log('createTag: ', createTag)
       }
+
+      // let getRef;
+      // try {
+      //   getRef = await octokit.git.getRef({
+      //     owner: context.repo.owner,
+      //     repo: context.repo.repo,
+      //     ref: 'refs/tags/v' + tag.name,
+      //   });
+      // } catch(error) {
+      //   console.log('getRef error: ', error);
+      //   getRef = false;
+      // }
+
+      // console.log('getRef: ', getRef);
+
+      // if ( getRef === false ) {
+      //   let createRef;
+      //   try {
+      //     createRef = await octokit.git.createRef({
+      //       owner: context.repo.owner,
+      //       repo: context.repo.repo,
+      //       tag: tag.name,
+      //       message: '',
+      //       object: tag.commit.sha,
+      //       type: 'commit'
+      //     });
+      //   } catch(error) {
+      //     console.log('createRef error: ', error);
+      //   }
+
+      //   console.log('createRef: ', createRef);
+      // }
+
+        let createRelease;
+        try {
+          createRelease = await octokit.git.createRelease({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag_name: tag.name,
+          });
+        } catch(error) {
+          console.log('createRelease error: ', error);
+        }
+
+        console.log('createRelease: ', createRelease);
+
     });
     
 
