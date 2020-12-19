@@ -26,7 +26,10 @@ async function run() {
 
 
   try {
-    let tags = await octokit.tags('getsentry/onpremise');
+    let tags = await octokit.repos.listTags({
+      owner: owner, 
+      repo: head
+    });
     console.log('tags: ', tags);
   } catch(error) {
     console.log('tags error: ', error);
