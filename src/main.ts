@@ -24,6 +24,14 @@ async function run() {
   const autoApprove = core.getInput('auto_approve', { required: false });
   const personalToken = core.getInput('personal_token', { required: false });
 
+
+  try {
+    let tags = await octokit.tags('getsentry/onpremise');
+    console.log('tags: ', tags);
+  } catch(error) {
+    console.log('tags error: ', error);
+  }
+
   try {
     let pr = await octokit.pulls.create({ owner: context.repo.owner, repo: context.repo.repo, title: prTitle, head: owner + ':' + head, base: base, body: prMessage, merge_method: mergeMethod, maintainer_can_modify: false });
     await delay(20);
