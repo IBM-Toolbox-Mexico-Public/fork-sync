@@ -20,7 +20,7 @@
     "automation",
     "sync"
   ],
-  "author": "TG908",
+  "author": "joejordanbrown",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.6",
