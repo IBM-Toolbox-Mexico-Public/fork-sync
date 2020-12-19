@@ -28,7 +28,7 @@ async function run() {
   try {
     let tags = await octokit.repos.listTags({
       owner: owner, 
-      repo: head
+      repo: context.repo.repo
     });
     console.log('tags: ', tags);
   } catch(error) {
