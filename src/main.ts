@@ -62,7 +62,7 @@ async function run() {
           owner: context.repo.owner,
           repo: context.repo.repo,
           tag: tag.name,
-          message: '',
+          message: 'Tag for release: ' + tag.name,
           object: tag.commit.sha,
           type: 'commit'
         });
