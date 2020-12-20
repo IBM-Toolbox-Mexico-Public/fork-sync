@@ -39,7 +39,7 @@ async function run() {
     // console.log('listTags: ', listTags);
     // console.log('listReleases: ', listReleases);
 
-    listTags.data.forEach( async (tag) => {
+    listTags.data.reverse().forEach( async (tag) => {
       console.log(tag.name + ' sha1: ', tag.commit.sha);
       let getTag;
       try {
