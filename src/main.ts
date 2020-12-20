@@ -54,24 +54,33 @@ async function run() {
       }
 
       console.log('getTag: ', getTag);
-
+      let createTag;
       if ( getTag === false ) {
-        let createTag;
+
         try {
-        createTag = await octokit.git.createTag({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          tag: tag.name,
-          message: 'Tag for release: ' + tag.name,
-          object: tag.commit.sha,
-          type: 'commit'
-        });
+          createTag = await octokit.git.createTag({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag: tag.name,
+            message: 'Tag for release: ' + tag.name,
+            object: tag.commit.sha,
+            type: 'commit'
+          });
+
+        
         } catch(error) {
           console.log('createTag error: ', error);
         }
 
         console.log('createTag: ', createTag)
       }
+
+      await octokit.git.createRef({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        ref: 'refs/tags/' + tag.name,
+        sha: createTag.data.sha
+      });
 
       // let getRef;
       // try {
