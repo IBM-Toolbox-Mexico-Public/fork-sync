@@ -5,6 +5,8 @@
 Github action to sync your Forks.
 This action uses octokit and the GitHub API to automatically create and merge a pull request with the head defined by `owner`:`head` into the base defined by `base`. If you create a PR in the same repository you can omit the `owner` parameter.
 
+General usage script: https://gist.github.com/iPedreroIBM/fc9c48f4abb98459642d5362e19774de#file-aoforksyncibm-yml
+
 # Example Workflow
 
 ```yml
